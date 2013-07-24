@@ -162,7 +162,7 @@ public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener
 		//Layout Component (1,2) Design and Implementation:
 		//Decimal Format
 		DecimalFormat DF = new DecimalFormat("#.##");
-		TargetAccountTotalLabel_ADPB = new JLabel(DF.format(TargetAccount.getAccountTotal()));
+		TargetAccountTotalLabel_ADPB = new JLabel("$" + DF.format(TargetAccount.getAccountTotal()));
 		GBConstraints_ADPB.fill = GridBagConstraints.HORIZONTAL;
 		GBConstraints_ADPB.gridheight = 1;
 		GBConstraints_ADPB.gridwidth = 1;

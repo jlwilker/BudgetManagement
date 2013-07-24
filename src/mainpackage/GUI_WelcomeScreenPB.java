@@ -4,6 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -38,6 +39,7 @@ public class GUI_WelcomeScreenPB extends JFrame implements ActionListener
 	 * JLabels (Welcome Message, Instructions):
 	 */
 	private JLabel Instruction_WSPB;
+	private JLabel SessionDate_WSPB;
 	
 	/*
 	 * Combo Box Variables (JCombo Box, Default ComboBox):
@@ -81,18 +83,33 @@ public class GUI_WelcomeScreenPB extends JFrame implements ActionListener
 		 */
 		
 		//Layout Component (0,0) Design and Initialization:
-		Instruction_WSPB = new JLabel("Please select account:");
+		SessionDate_WSPB = new JLabel("Will be date");
+		// DateFormat.getInstance().format(targetItem.getDate())
 		GBConstraints_WSPB.fill = GridBagConstraints.HORIZONTAL;
 		GBConstraints_WSPB.gridheight = 1;
 		GBConstraints_WSPB.gridwidth = 1;
 		GBConstraints_WSPB.gridx = 0;
 		GBConstraints_WSPB.gridy = 0;
+		GBConstraints_WSPB.ipady = 10;
 		GBConstraints_WSPB.anchor = GridBagConstraints.LINE_START;
 		
 		//Add (0,0) Component to Layout
-		WelcomeScreen_PB.add(Instruction_WSPB, GBConstraints_WSPB);
+		WelcomeScreen_PB.add(SessionDate_WSPB, GBConstraints_WSPB);
 		
 		//Layout Component (0,1) Design and Initialization:
+		Instruction_WSPB = new JLabel("Please select account:");
+		GBConstraints_WSPB.fill = GridBagConstraints.HORIZONTAL;
+		GBConstraints_WSPB.gridheight = 1;
+		GBConstraints_WSPB.gridwidth = 1;
+		GBConstraints_WSPB.gridx = 0;
+		GBConstraints_WSPB.gridy = 1;
+		GBConstraints_WSPB.ipady = 0;
+		GBConstraints_WSPB.anchor = GridBagConstraints.LINE_START;
+		
+		//Add (0,1) Component to Layout
+		WelcomeScreen_PB.add(Instruction_WSPB, GBConstraints_WSPB);
+		
+		//Layout Component (0,2) Design and Initialization:
 		AccountSelectionList_WSPB = new DefaultComboBoxModel();
 		
 		for (Account temp : SessionGUI_Global.getAvailableAccounts())
@@ -107,13 +124,13 @@ public class GUI_WelcomeScreenPB extends JFrame implements ActionListener
 		GBConstraints_WSPB.gridheight = 1;
 		GBConstraints_WSPB.gridwidth = 2;
 		GBConstraints_WSPB.gridx = 0;
-		GBConstraints_WSPB.gridy = 1;
+		GBConstraints_WSPB.gridy = 2;
 		GBConstraints_WSPB.anchor = GridBagConstraints.LINE_START;
 				
-		//Add (0,1) Component to Layout
+		//Add (0,2) Component to Layout
 		WelcomeScreen_PB.add(AccountSelectionComboBox_WSPB, GBConstraints_WSPB);
 		
-		//Layout Component (0,2) Design and Initialization:
+		//Layout Component (0,3) Design and Initialization:
 		OKButton_WSPB = new JButton("OK");
 		//JButton Listeners
 		OKButton_WSPB.addActionListener(this);
@@ -121,13 +138,13 @@ public class GUI_WelcomeScreenPB extends JFrame implements ActionListener
 		GBConstraints_WSPB.gridheight = 1;
 		GBConstraints_WSPB.gridwidth = 1;
 		GBConstraints_WSPB.gridx = 0;
-		GBConstraints_WSPB.gridy = 2;
+		GBConstraints_WSPB.gridy = 3;
 		GBConstraints_WSPB.ipady = 10;
 		
-		//Add (0,2) Component to Layout
+		//Add (0,3) Component to Layout
 		WelcomeScreen_PB.add(OKButton_WSPB, GBConstraints_WSPB);
 		
-		//Layout Component (1,2) Design and Initialization:
+		//Layout Component (1,3) Design and Initialization:
 		CancelButton_WSPB = new JButton("Cancel");
 		//JButton Listeners
 		CancelButton_WSPB.addActionListener(this);
@@ -135,10 +152,10 @@ public class GUI_WelcomeScreenPB extends JFrame implements ActionListener
 		GBConstraints_WSPB.gridheight = 1;
 		GBConstraints_WSPB.gridwidth = 1;
 		GBConstraints_WSPB.gridx = 1;
-		GBConstraints_WSPB.gridy = 2;
+		GBConstraints_WSPB.gridy = 3;
 		GBConstraints_WSPB.ipady = 10;
 		
-		//Add (1,2) Component to Layout
+		//Add (1,3) Component to Layout
 		WelcomeScreen_PB.add(CancelButton_WSPB, GBConstraints_WSPB);
 		
 		//Visibility Options

@@ -92,6 +92,7 @@ public class GUI_RecentAccountActivityPB extends JFrame implements ActionListene
 			GBConstraints_RAAPB.gridx = 0;
 			GBConstraints_RAAPB.gridy = i;
 			GBConstraints_RAAPB.weightx = 1;
+			//GBConstraints_RAAPB.ipady = 10;
 			
 			//Add Component (0,i) to Layout
 			RecentAccountActivity_PB.add(AIDisplayPanel_RAAPB, GBConstraints_RAAPB);

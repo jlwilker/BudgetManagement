@@ -154,7 +154,7 @@ public class GUI_AddItemScreenPB extends JFrame implements ActionListener
 		AddItemScreen_PB.add(ItemDateLabel_AIPB, GBConstraints_AIPB);
 		
 		//Layout Component (1,2) Design and Implementation:
-		TargetItemDate = new Date();
+		TargetItemDate = SessionGUI_Global.getSessionDate().getTime();
 		TargetItemDateLabel_AIPB = new JLabel(TargetItemDate.toString());
 		GBConstraints_AIPB.fill = GridBagConstraints.HORIZONTAL;
 		GBConstraints_AIPB.gridheight = 1;

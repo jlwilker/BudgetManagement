@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 public class GUI_PersonalBudget {
 	private static GUI_WelcomeScreenPB WelcomeScreen;
 	private static GUI_AccountDisplayScreenPB AccountDisplay;
-	private static Calendar sessionDate = Calendar.getInstance();
+	private static Calendar sessionDate;
 	
 	private static ArrayList<Account> AvailableAccounts = new ArrayList<Account>();
 	
@@ -22,8 +22,24 @@ public class GUI_PersonalBudget {
 		return AvailableAccounts;
 	}
 	
+	
+	public Calendar getSessionDate() {
+		return sessionDate;
+	}
+
+
+	public void setSessionDate(Calendar sessionDate) {
+		GUI_PersonalBudget.sessionDate = sessionDate;
+	}
+
+
 	public GUI_PersonalBudget()
 	{
+		/*
+		 * Create Calendar Reference for Session
+		 */
+		setSessionDate(Calendar.getInstance());
+		
 		//Initialize Array for Testing:
 		Account AccountOne, AccountTwo;
 		AccountItem AccountOneItemOne, AccountOneItemTwo, AccountTwoItemOne, AccountTwoItemTwo;
