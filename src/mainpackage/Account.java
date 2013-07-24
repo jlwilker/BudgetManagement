@@ -147,6 +147,17 @@ public class Account {
 		this.AccountItemRA.add(toBeAdded); //add AccountItem to array
 		
 	}
+	/**
+	 * Adds account items from arrayList pulled from the XMLReader
+	 * @param toBeAdded
+	 */
+	public void addMultipleAccountItems(ArrayList<AccountItem> toBeAdded)
+	{
+		for(AccountItem it : toBeAdded)
+		{
+			this.addAccountItem(it);
+		}
+	}
 	
 	//need "removeAccountItem" function
 	

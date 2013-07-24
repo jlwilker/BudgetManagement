@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<!-- start definitions -->
+
+<xs:element name="name">
+	<xs:simpleType>
+		<xs:restriction base="xs:string">
+		</xs:restriction>
+	</xs:simpleType>
+</xs:element>
+
+<xs:element name="total">
+	<xs:simpleType>
+		<xs:restriction base="xs:double">
+		</xs:restriction>
+	</xs:simpleType>
+</xs:element>
+
+<xs:element name="amount">
+	<xs:simpleType>
+		<xs:restriction base="xs:double">
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:element>
+
+<xs:element name="date">
+	<xs:simpleType>
+		<xs:restriction base="xs:date">
+		</xs:restriction>
+	</xs:simpleType>
+</xs:element>
+
+<xs:element name="category">
+	<xs:simpleType>
+		<xs:restriction base="xs:string">
+		</xs:restriction>
+	</xs:simpleType>
+</xs:element>
+
+<xs:element name="incomeFlag">
+	<xs:simpleType>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="(0|1)"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:element>
+
+<!-- end definitions -->
+
+<!-- start xml document layout -->
+
+<xs:element name="accounts">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element name="account" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="name" minOccurs="1" maxOccurs="1"/>
+						<xs:element ref="total" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="items" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="item" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element ref="name" minOccurs="1" maxOccurs="1"/>
+												<xs:element ref="amount"  minOccurs="1" maxOccurs="1"/>
+												<xs:element ref="date" minOccurs="1" maxOccurs="1"/>
+												<xs:element ref="category" minOccurs="1" maxOccurs="1"/>
+												<xs:element ref="incomeFlag" minOccurs="1" maxOccurs="1"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+</xs:complexType>
+</xs:element>
+<!-- end xml document layout -->
+
+</xs:schema>
+
+
