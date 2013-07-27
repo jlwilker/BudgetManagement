@@ -15,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import mainpackage.xml.XMLWriter;
+
 public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener 
 {
 	/*
@@ -243,6 +245,10 @@ public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener
 	{
 		if (e.getSource() == OKButton_ADPB)
 		{
+			//delete later, but testing now
+			XMLWriter writer = new XMLWriter();
+			writer.writeXML();
+			
 			//call next window
 			AccountDisplayScreen_PB.dispose(); 
 		}
