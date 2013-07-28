@@ -42,10 +42,6 @@ public class GUI_PersonalBudget {
 		 */
 		setSessionDate(Calendar.getInstance());
 		
-		//Initialize Array for Testing:
-		Account AccountOne, AccountTwo;
-		AccountItem AccountOneItemOne, AccountOneItemTwo, AccountTwoItemOne, AccountTwoItemTwo;
-		
 		// instantiate XMLReader here, have it populate all .xml files in current directory
 		// the XMLReader object will store an ArrayList of accounts once it finishes
 		XMLReader readAccounts = new XMLReader();
@@ -56,21 +52,6 @@ public class GUI_PersonalBudget {
 
 		// add them to AvailableAccounts
 		AvailableAccounts.addAll(accountsToAdd);
-		
-		AccountOne = new Account("Account One", 305.11);
-		AccountOneItemOne = new AccountItem("A1 Item1", 2.34, new Date(), "Food", 0);
-		AccountOneItemTwo = new AccountItem("A1 Item2", 4.59, new Date(), "Entertainment", 0);
-		AccountOne.addAccountItem(AccountOneItemOne);
-		AccountOne.addAccountItem(AccountOneItemTwo);
-		
-		AccountTwo = new Account("Account Two", 3942.12);
-		AccountTwoItemOne = new AccountItem("A2 Item1", 692.06, new Date(), "Paycheck", 1);
-		AccountTwoItemTwo = new AccountItem("A2 Item2", 63.21, new Date(), "Groceries", 0);
-		AccountTwo.addAccountItem(AccountTwoItemOne);
-		AccountTwo.addAccountItem(AccountTwoItemTwo);
-		
-		AvailableAccounts.add(AccountOne);
-		AvailableAccounts.add(AccountTwo);
 		
 		//*
 		WelcomeScreen = new GUI_WelcomeScreenPB();

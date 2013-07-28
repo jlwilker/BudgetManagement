@@ -247,7 +247,7 @@ public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener
 		{
 			//delete later, but testing now
 			XMLWriter writer = new XMLWriter();
-			writer.writeXML();
+			writer.writeXML(SessionGUI_Global.getAvailableAccounts());
 			
 			//call next window
 			AccountDisplayScreen_PB.dispose(); 

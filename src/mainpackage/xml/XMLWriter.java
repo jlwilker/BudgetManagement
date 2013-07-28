@@ -3,10 +3,18 @@ package mainpackage.xml;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
+
+import mainpackage.Account;
+import mainpackage.AccountItem;
+import mainpackage.GUI_PersonalBudget;
 
 
 /*
@@ -19,51 +27,82 @@ public class XMLWriter
 	XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
 	XMLStreamWriter streamWriter = null;
 	
-	public void writeXML()
+	// set up DateFormat
+	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	
+	public void writeXML(ArrayList<Account> accountsToWrite)
 	{ 
 		try
 		{
-			//if file not found? (should create)
-			File targetFile = new File("C:/Users/jwilker201/Documents/Budget/PersonalBudget/BudgetManagement/practice.xml");
+			//create file for writing; rewrite if file exists already
+			File targetFile = new File("practice.xml");
 			
 			streamWriter = outputFactory.createXMLStreamWriter(new FileOutputStream(targetFile), "UTF-8");
 			streamWriter.writeStartDocument("UTF-8", "1.0");
 			
+			//"Accounts" tag
 			streamWriter.writeStartElement("accounts");
 			
-			streamWriter.writeStartElement("account");
-			streamWriter.writeAttribute("id", "1");
+			for (Account temp : accountsToWrite)
+			{
+				//"Account" tag for each account
+				streamWriter.writeStartElement("account");
+				
+				//set account name tag
+				streamWriter.writeStartElement("name");
+				streamWriter.writeCharacters(temp.getAccountName());
+				streamWriter.writeEndElement();
+				
+				//set account total tag
+				streamWriter.writeStartElement("total");
+				streamWriter.writeCharacters(String.valueOf((long)temp.getAccountTotal()));
+				streamWriter.writeEndElement();
+				
+				//"Items" tag
+				streamWriter.writeStartElement("items");
+				
+				for (AccountItem tempItem : temp.getAccountItemRA())
+				{
+					//"Item" tag for each item
+					streamWriter.writeStartElement("item");
+					
+					//Item name tag
+					streamWriter.writeStartElement("name");
+					streamWriter.writeCharacters(tempItem.getName());
+					streamWriter.writeEndElement();
+					
+					//Item amount tag
+					streamWriter.writeStartElement("amount");
+					streamWriter.writeCharacters(String.valueOf((long)tempItem.getAmount()));
+					streamWriter.writeEndElement();
+					
+					//Item date tag
+					streamWriter.writeStartElement("date");
+					streamWriter.writeCharacters(df.format(tempItem.getDate()));
+					streamWriter.writeEndElement();
+					
+					//Item category tag
+					streamWriter.writeStartElement("category");
+					streamWriter.writeCharacters(tempItem.getCategory());
+					streamWriter.writeEndElement();
+					
+					//Item incomeFlag tag
+					streamWriter.writeStartElement("incomeFlag");
+					streamWriter.writeCharacters(String.valueOf((int)tempItem.getIncomeFlag()));
+					streamWriter.writeEndElement();
+					
+					//End "Item" tag
+					streamWriter.writeEndElement();
+				}
+				
+				//End "Items" tag
+				streamWriter.writeEndElement();
 			
-			streamWriter.writeStartElement("name");
-			streamWriter.writeCharacters("Zack");
-			streamWriter.writeEndElement();
+				//End "Account" tag
+				streamWriter.writeEndElement();
+			}
 			
-			streamWriter.writeStartElement("total");
-			streamWriter.writeCharacters("3000.00");
-			streamWriter.writeEndElement();
-			
-			streamWriter.writeStartElement("items");
-			
-			streamWriter.writeStartElement("item");
-			
-			streamWriter.writeStartElement("name");
-			streamWriter.writeCharacters("food");
-			streamWriter.writeEndElement();
-			
-			streamWriter.writeStartElement("amount");
-			streamWriter.writeCharacters("50.00");
-			streamWriter.writeEndElement();
-			
-			streamWriter.writeStartElement("date");
-			streamWriter.writeCharacters("2013-07-14");
-			streamWriter.writeEndElement();
-			
-			streamWriter.writeStartElement("category");
-			streamWriter.writeCharacters("grocery");
-			streamWriter.writeEndElement();
-			
-			streamWriter.writeStartElement("incomeFlag");
-			streamWriter.writeCharacters("0");
+			//End "Accounts" tag
 			streamWriter.writeEndElement();
 			
 			streamWriter.writeEndDocument();
