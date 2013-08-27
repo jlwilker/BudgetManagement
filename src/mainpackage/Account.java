@@ -8,39 +8,41 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Account {
+public class Account 
+{
 	
 	private String accountName;
 	private double accountTotal;
-	private ArrayList<AccountItem> AccountItemRA = new ArrayList<AccountItem>();
-	private ArrayList<RecurringAccountItem> ReccuringAI_RA = new ArrayList<RecurringAccountItem>();
+	private List<AccountItem> AccountItemRA = new ArrayList<AccountItem>();
 	
-	public Account() {
-		super();
+	/**
+	 * Create a default Account with dummy data
+	 */
+	public Account() 
+	{
 		this.accountName = "";
 		this.accountTotal = -1;
-		this.AccountItemRA.add(new AccountItem("dummyAccountItem", -1, new Date(), "dummycategory", -1));
 	}
 	
 	/**
+	 * Create an Account with the given attributes
+	 * 
 	 * @param accountName
 	 * @param accountTotal
-	 * @param categoryRA
-	 * @param dateRA
-	 * @param AccountItemRA
 	 */
-	public Account(String accountName, double accountTotal) {
-		super();
+	public Account(String accountName, double accountTotal) 
+	{
 		this.accountName = accountName;
 		this.accountTotal = accountTotal;
 	}
 	
-	public ArrayList<AccountItem> getAccountItemRA()
+	public List<AccountItem> getAccountItemRA()
 	{
 		return this.AccountItemRA;
 	}
 
-	public String getAccountName() {
+	public String getAccountName() 
+	{
 		return accountName;
 	}
 	public String toString()
@@ -48,15 +50,18 @@ public class Account {
 		return accountName;
 	}
 
-	public void setAccountName(String accountName) {
+	public void setAccountName(String accountName) 
+	{
 		this.accountName = accountName;
 	}
 
-	public double getAccountTotal() {
+	public double getAccountTotal() 
+	{
 		return accountTotal;
 	}
 
-	public void setAccountTotal(double accountTotal) {
+	public void setAccountTotal(double accountTotal) 
+	{
 		this.accountTotal = accountTotal;
 	}
 	
@@ -64,8 +69,11 @@ public class Account {
 	 * Retrieve Item Methods
 	 */
 	
-	/*
-	 * Retrieve by Name
+	/**
+	 * Method to retrieve a list of account items with a given name
+	 * 
+	 * @param target
+	 * @return List<AccountItem>
 	 */
 	public List<AccountItem> retrieveAccountItemByName(String target)
 	{
@@ -82,8 +90,11 @@ public class Account {
 		return TargetItemList;  
 	}
 	
-	/*
-	 * Retrieve by Category
+	/**
+	 * Method to retrieve a list of account items with a given category
+	 * 
+	 * @param target
+	 * @return List<AccountItem>
 	 */
 	public List<AccountItem> retrieveAccountItemByCategory(String target)
 	{
@@ -100,8 +111,11 @@ public class Account {
 		return TargetItemList;  
 	}
 	
-	/*
-	 * Retrieve by Date
+	/**
+	 * Method to retrieve a list of account items with a given date
+	 * 
+	 * @param target
+	 * @return List<AccountItem>
 	 */
 	public List<AccountItem> retrieveAccountItemByDate(Date target)
 	{
@@ -124,18 +138,22 @@ public class Account {
 	 * < target, etc.
 	 */
 
+	/**
+	 * Method to add an AccountItem to an Account
+	 * 
+	 * @param toBeAdded
+	 */
 	public void addAccountItem(AccountItem toBeAdded)
 	{
-		String AccountItemName = toBeAdded.getName();
 		double AccountItemAmount = toBeAdded.getAmount();
-		String AccountItemCategory = toBeAdded.getCategory();
-		Date AccountItemDate = toBeAdded.getDate();
 		Integer AccountItemIncomeFlag = toBeAdded.getIncomeFlag();
 		
 		if(AccountItemIncomeFlag.equals(0))
-			this.setAccountTotal(this.getAccountTotal() - AccountItemAmount); //adjust account total
+			//adjust account total
+			this.setAccountTotal(this.getAccountTotal() - AccountItemAmount); 
 		else if(AccountItemIncomeFlag.equals(1))
-			this.setAccountTotal(this.getAccountTotal() + AccountItemAmount); //adjust account total
+			//adjust account total
+			this.setAccountTotal(this.getAccountTotal() + AccountItemAmount); 
 		else
 			System.out.println("Invalid incomeFlag."); //need to add loop or chance to correct
 		/*
@@ -145,8 +163,23 @@ public class Account {
 		 */
 		
 		this.AccountItemRA.add(toBeAdded); //add AccountItem to array
+	}
+	
+	/**
+	 * Method to add an AccountItem to an Account from a file
+	 * 
+	 *  - Must be different from above method or else 
+	 *    each AccountItem gets subtracted from the Account
+	 *    total on every startup.
+	 * 
+	 * @param toBeAdded
+	 */
+	public void addAccountItemFromFile(AccountItem toBeAdded)
+	{
+		this.AccountItemRA.add(toBeAdded); //add AccountItem to array
 		
 	}
+	
 	/**
 	 * Adds account items from arrayList pulled from the XMLReader
 	 * @param toBeAdded
@@ -155,29 +188,37 @@ public class Account {
 	{
 		for(AccountItem it : toBeAdded)
 		{
-			this.addAccountItem(it);
+			this.addAccountItemFromFile(it);
 		}
 	}
 	
 	//need "removeAccountItem" function
-	
-	/*
-	 * Method to create a panel that displays information for a single account item
-	 *    - that panel is then added as a component of the gridbag
-	 
-	public void CreateAccountItemPanel(AccountItem targetItem)
-	{
-		AIDisplayPanel_RAAPB = new JPanel(new GridLayout(2, 2, 5, 0));
-		
-		AIDisplayPanelName_RAAPB = new JLabel(targetItem.getName());
-		AIDisplayPanelCategory_RAAPB = new JLabel(targetItem.getCategory());
-		AIDisplayPanelAmount_RAAPB = new JLabel(Double.toString(targetItem.getAmount()));
-		AIDisplayPanelDate_RAAPB = new JLabel(targetItem.getDate().toString());
-		
-		AIDisplayPanel_RAAPB.add(AIDisplayPanelName_RAAPB);
-		AIDisplayPanel_RAAPB.add(AIDisplayPanelCategory_RAAPB);
-		AIDisplayPanel_RAAPB.add(AIDisplayPanelAmount_RAAPB);
-		AIDisplayPanel_RAAPB.add(AIDisplayPanelDate_RAAPB);
-	}*/
+	/**
+	* Goes in Account Class, function to remove AccountItem from a given Account
+	*/
 
+	public void RemoveAccountItem(AccountItem targetItem) 
+	{
+	    for (AccountItem temp : this.getAccountItemRA())
+	    {
+	        if (this.compareAccountItems(targetItem, temp))
+	        {
+	            this.AccountItemRA.remove(temp);
+	        }
+	    }    
+	}
+
+	/**
+	* Goes in Account Class, function to compare two AccountItems
+	*/
+
+	public boolean compareAccountItems(AccountItem itemA, AccountItem itemB)
+	{
+		return((itemA.getName().equals(itemB.getName()) && 
+			    (itemA.getAmount() == itemB.getAmount())) &&
+			    (itemA.getCategory().equals(itemB.getCategory())) &&
+			    (itemA.getDate().equals(itemB.getDate())) &&
+			    (itemA.getIncomeFlag() == itemB.getIncomeFlag()));
+
+	}
 }

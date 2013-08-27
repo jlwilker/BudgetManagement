@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import mainpackage.mysql.Retrieve;
 import mainpackage.xml.XMLWriter;
 
 public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener 
@@ -48,6 +49,9 @@ public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener
 	 */
 	private JPanel AIDisplayPanel_PB;
 	
+	private JPanel UpcomingActivityPanel_PB;
+	private JPanel UpcomingActivityPanel_ADPB;
+	
 	/*
 	 * JLabels (Welcome Message, Instructions):
 	 */
@@ -61,6 +65,9 @@ public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener
 	private JLabel AIDisplayPanelAmount_PB;
 	private JLabel AIDisplayPanelDate_PB;
 	
+	private JLabel UpcomingActivityLabel_PB;
+	private JLabel UpcomingActivityLabel_ADPB;
+	
 	/*
 	 * Button Variables (OK, Cancel):
 	 */
@@ -70,6 +77,11 @@ public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener
 	private JButton	RecentActivityButton_ADPB;
 	
 	/*
+	 * MySQL Retrieve Commands
+	 */
+	Retrieve retrieve = new Retrieve();
+	
+	/*
 	 * GridBag Components (GridBagLayout, GridBagConstraints):
 	 */
 	private GridBagLayout GBLayout_ADPB = new GridBagLayout();
@@ -77,10 +89,11 @@ public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener
 	
 	public JPanel CreateAccountItemPanel(AccountItem targetItem)
 	{
-		AIDisplayPanel_PB = new JPanel(new GridLayout(2, 2, 1, 0));
+		AIDisplayPanel_PB = new JPanel(new GridLayout(2, 2, 1, 2));
 		
 		AIDisplayPanelName_PB = new JLabel(targetItem.getName());
 		//change show that $ symbol can be changed w/language pack?
+		//Need to update with Decimal Format so that it looks like "X.XX" instead of "X.X"
 		AIDisplayPanelAmount_PB = new JLabel("$" + Double.toString(targetItem.getAmount()));
 		AIDisplayPanelCategory_PB = new JLabel(targetItem.getCategory());
 		AIDisplayPanelDate_PB = new JLabel(DateFormat.getInstance().format(targetItem.getDate()));
@@ -175,65 +188,124 @@ public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener
 		AccountDisplayScreen_PB.add(TargetAccountTotalLabel_ADPB, GBConstraints_ADPB);
 		
 		//Layout Component (0,3) Design and Implementation:
-		AddItemButton_ADPB = new JButton("Add Item");
+		AccountNameLabel_ADPB = new JLabel("----------------------------------------");
 		GBConstraints_ADPB.fill = GridBagConstraints.HORIZONTAL;
 		GBConstraints_ADPB.gridheight = 1;
-		GBConstraints_ADPB.gridwidth = 1;
+		GBConstraints_ADPB.gridwidth = 2;
 		GBConstraints_ADPB.gridx = 0;
 		GBConstraints_ADPB.gridy = 3;
-		GBConstraints_ADPB.ipadx = 10;
-		AddItemButton_ADPB.addActionListener(this);
 		
 		//Add Component (0,3) to Layout
-		AccountDisplayScreen_PB.add(AddItemButton_ADPB, GBConstraints_ADPB);
+		AccountDisplayScreen_PB.add(AccountNameLabel_ADPB, GBConstraints_ADPB);
 		
-		//Layout Component (1,3) Design and Implementation:
-		DisplayItemButton_ADPB = new JButton("Display Item");
-		GBConstraints_ADPB.fill = GridBagConstraints.HORIZONTAL;
-		GBConstraints_ADPB.gridheight = 1;
-		GBConstraints_ADPB.gridwidth = 1;
-		GBConstraints_ADPB.gridx = 1;
-		GBConstraints_ADPB.gridy = 3;
-		GBConstraints_ADPB.ipadx = 10;
-		DisplayItemButton_ADPB.addActionListener(this);
-		
-		//Add Component (1,3) to Layout
-		AccountDisplayScreen_PB.add(DisplayItemButton_ADPB, GBConstraints_ADPB);
-		
-		//Layout Component (1,3) Design and Implementation:
-		RecentActivityButton_ADPB = new JButton("Recent Activity");
+		//Layout Component (0,4) Design and Implementation:
+		AccountNameLabel_ADPB = new JLabel("Upcoming Activity: ");
 		GBConstraints_ADPB.fill = GridBagConstraints.HORIZONTAL;
 		GBConstraints_ADPB.gridheight = 1;
 		GBConstraints_ADPB.gridwidth = 1;
 		GBConstraints_ADPB.gridx = 0;
 		GBConstraints_ADPB.gridy = 4;
+		
+		//Add Component (0,4) to Layout
+		AccountDisplayScreen_PB.add(AccountNameLabel_ADPB, GBConstraints_ADPB);
+		
+		/*
+		 * This populates the resultSetRA with appropriate values
+		 */
+		retrieve.upcomingActivityRetrieveMySQL();
+		
+		int gridValueY;
+		
+		//this is going to need to be updated for Accounts that have large numbers of items
+		//probably going to need to be outside function, because will need passed in boundary
+		for(gridValueY=5; gridValueY < retrieve.getResultSetRA().size()+5; gridValueY++) 
+		{	
+			UpcomingActivityPanel_ADPB = CreateAccountItemPanel
+					(retrieve.getResultSetRA().get(gridValueY-5));
+			
+			//Layout Component (0,i) Design and Implementation
+			GBConstraints_ADPB.fill = GridBagConstraints.HORIZONTAL;
+			GBConstraints_ADPB.gridheight = 1;
+			GBConstraints_ADPB.gridwidth = 2;
+			GBConstraints_ADPB.gridx = 0;
+			GBConstraints_ADPB.gridy = gridValueY;
+			GBConstraints_ADPB.weightx = 1;
+			
+			//Add Component (0,i) to Layout
+			AccountDisplayScreen_PB.add(UpcomingActivityPanel_ADPB, GBConstraints_ADPB);
+		}
+		
+		//Layout Component (0,5) Design and Implementation:
+		AccountNameLabel_ADPB = new JLabel("----------------------------------------");
+		GBConstraints_ADPB.fill = GridBagConstraints.HORIZONTAL;
+		GBConstraints_ADPB.gridheight = 1;
+		GBConstraints_ADPB.gridwidth = 2;
+		GBConstraints_ADPB.gridx = 0;
+		GBConstraints_ADPB.gridy = ++gridValueY;
+		
+		//Add Component (0,5) to Layout
+		AccountDisplayScreen_PB.add(AccountNameLabel_ADPB, GBConstraints_ADPB);
+		
+		//Layout Component (0,6) Design and Implementation:
+		AddItemButton_ADPB = new JButton("Add Item");
+		GBConstraints_ADPB.fill = GridBagConstraints.HORIZONTAL;
+		GBConstraints_ADPB.gridheight = 1;
+		GBConstraints_ADPB.gridwidth = 1;
+		GBConstraints_ADPB.gridx = 0;
+		GBConstraints_ADPB.gridy = ++gridValueY;
+		GBConstraints_ADPB.ipadx = 10;
+		AddItemButton_ADPB.addActionListener(this);
+		
+		//Add Component (0,6) to Layout
+		AccountDisplayScreen_PB.add(AddItemButton_ADPB, GBConstraints_ADPB);
+		
+		//Layout Component (1,6) Design and Implementation:
+		DisplayItemButton_ADPB = new JButton("Display Item");
+		GBConstraints_ADPB.fill = GridBagConstraints.HORIZONTAL;
+		GBConstraints_ADPB.gridheight = 1;
+		GBConstraints_ADPB.gridwidth = 1;
+		GBConstraints_ADPB.gridx = 1;
+		GBConstraints_ADPB.gridy = gridValueY;
+		GBConstraints_ADPB.ipadx = 10;
+		DisplayItemButton_ADPB.addActionListener(this);
+		
+		//Add Component (1,6) to Layout
+		AccountDisplayScreen_PB.add(DisplayItemButton_ADPB, GBConstraints_ADPB);
+		
+		//Layout Component (1,7) Design and Implementation:
+		RecentActivityButton_ADPB = new JButton("Recent Activity");
+		GBConstraints_ADPB.fill = GridBagConstraints.HORIZONTAL;
+		GBConstraints_ADPB.gridheight = 1;
+		GBConstraints_ADPB.gridwidth = 1;
+		GBConstraints_ADPB.gridx = 0;
+		GBConstraints_ADPB.gridy = ++gridValueY;
 		RecentActivityButton_ADPB.addActionListener(this);
 		
-		//Add Component (1,3) to Layout
+		//Add Component (1,7) to Layout
 		AccountDisplayScreen_PB.add(RecentActivityButton_ADPB, GBConstraints_ADPB);
 
-		//Layout Component (0,6) Design and Implementation:
+		//Layout Component (0,8) Design and Implementation:
 		OKButton_ADPB = new JButton("OK");
 		GBConstraints_ADPB.fill = GridBagConstraints.HORIZONTAL;
 		GBConstraints_ADPB.gridheight = 1;
 		GBConstraints_ADPB.gridwidth = 1;
 		GBConstraints_ADPB.gridx = 0;
-		GBConstraints_ADPB.gridy = 6;
+		GBConstraints_ADPB.gridy = ++gridValueY;
 		OKButton_ADPB.addActionListener(this);
 		
-		//Add Component (0,6) to Layout
+		//Add Component (0,8) to Layout
 		AccountDisplayScreen_PB.add(OKButton_ADPB, GBConstraints_ADPB);
 		
-		//Layout Component (1,6) Design and Implementation:
+		//Layout Component (1,8) Design and Implementation:
 		CancelButton_ADPB = new JButton("Cancel");
 		GBConstraints_ADPB.fill = GridBagConstraints.HORIZONTAL;
 		GBConstraints_ADPB.gridheight = 1;
 		GBConstraints_ADPB.gridwidth = 1;
 		GBConstraints_ADPB.gridx = 1;
-		GBConstraints_ADPB.gridy = 6;
+		GBConstraints_ADPB.gridy = gridValueY;
 		CancelButton_ADPB.addActionListener(this);
 		
-		//Add Component (1,6) to Layout
+		//Add Component (1,8) to Layout
 		AccountDisplayScreen_PB.add(CancelButton_ADPB, GBConstraints_ADPB);
 		
 		//Visibility Options

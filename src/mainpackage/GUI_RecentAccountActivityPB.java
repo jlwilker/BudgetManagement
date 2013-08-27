@@ -46,7 +46,8 @@ public class GUI_RecentAccountActivityPB extends JFrame implements ActionListene
 	private GridBagConstraints GBConstraints_RAAPB = new GridBagConstraints();
 	
 	public void CreateAndShowWindow(GUI_PersonalBudget SessionGUI_Local, 
-			GUI_WelcomeScreenPB WelcomeScreen_Local, GUI_AccountDisplayScreenPB AccountDisplay_Local)
+			GUI_WelcomeScreenPB WelcomeScreen_Local, 
+			GUI_AccountDisplayScreenPB AccountDisplay_Local)
 	{
 		/*
 		 * Assign passed SessionGUI to Global variable to enable passing to next window
@@ -73,53 +74,50 @@ public class GUI_RecentAccountActivityPB extends JFrame implements ActionListene
 		/*
 		 * Initialize and Add Components to Layout:
 		 */
-		//global?
-		
-		//global?
-		int i;
+		//Grid will have variable amount of Y sections
+		int gridValueY;
 		
 		//this is going to need to be updated for Accounts that have large numbers of items
 		//probably going to need to be outside function, because will need passed in boundary
-		for(i=0; i < TargetAccount.getAccountItemRA().size(); i++) 
+		for(gridValueY=0; gridValueY < TargetAccount.getAccountItemRA().size(); gridValueY++) 
 		{	
 			AIDisplayPanel_RAAPB = AccountDisplay_Global.CreateAccountItemPanel
-					(TargetAccount.getAccountItemRA().get(i));
+					(TargetAccount.getAccountItemRA().get(gridValueY));
 			
 			//Layout Component (0,i) Design and Implementation
 			GBConstraints_RAAPB.fill = GridBagConstraints.HORIZONTAL;
 			GBConstraints_RAAPB.gridheight = 1;
 			GBConstraints_RAAPB.gridwidth = 2;
 			GBConstraints_RAAPB.gridx = 0;
-			GBConstraints_RAAPB.gridy = i;
+			GBConstraints_RAAPB.gridy = gridValueY;
 			GBConstraints_RAAPB.weightx = 1;
-			//GBConstraints_RAAPB.ipady = 10;
 			
 			//Add Component (0,i) to Layout
 			RecentAccountActivity_PB.add(AIDisplayPanel_RAAPB, GBConstraints_RAAPB);
 		}
 		
-		//Layout Component (0,5) Design and Implementation:
+		//Layout Component (0,++gridValueY) Design and Implementation:
 		OKButton_RAAPB = new JButton("OK");
 		GBConstraints_RAAPB.fill = GridBagConstraints.HORIZONTAL;
 		GBConstraints_RAAPB.gridheight = 1;
 		GBConstraints_RAAPB.gridwidth = 1;
 		GBConstraints_RAAPB.gridx = 0;
-		GBConstraints_RAAPB.gridy = 5; //++i
+		GBConstraints_RAAPB.gridy = ++gridValueY;
 		OKButton_RAAPB.addActionListener(this);
 		
-		//Add Component (0,5) to Layout
+		//Add Component (0,++gridValueY) to Layout
 		RecentAccountActivity_PB.add(OKButton_RAAPB, GBConstraints_RAAPB);
 		
-		//Layout Component (1,5) Design and Implementation:
+		//Layout Component (1,gridValueY) Design and Implementation:
 		CancelButton_RAAPB = new JButton("Cancel");
 		GBConstraints_RAAPB.fill = GridBagConstraints.HORIZONTAL;
 		GBConstraints_RAAPB.gridheight = 1;
 		GBConstraints_RAAPB.gridwidth = 1;
 		GBConstraints_RAAPB.gridx = 1;
-		GBConstraints_RAAPB.gridy = 5; //5
+		GBConstraints_RAAPB.gridy = gridValueY; 
 		CancelButton_RAAPB.addActionListener(this);
 		
-		//Add Component (1,6) to Layout
+		//Add Component (1,gridValueY) to Layout
 		RecentAccountActivity_PB.add(CancelButton_RAAPB, GBConstraints_RAAPB);
 		
 		//Visibility Options

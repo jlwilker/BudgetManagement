@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="mainpackage/mysql/BatchUpdate.java|mainpackage/mysql/ColumnHeaders.java|mainpackage/mysql/Multiple.java|mainpackage/mysql/NotPrepared.java|mainpackage/mysql/ReadImage.java|mainpackage/mysql/Transaction.java|mainpackage/mysql/WriteImage.java|mainpackage/mysql/Version.java|mainpackage/mysql/Prepared.java" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="libs/mysql-connector-java-5.1.26-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
