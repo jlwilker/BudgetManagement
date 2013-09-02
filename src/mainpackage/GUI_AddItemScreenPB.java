@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -154,7 +155,7 @@ public class GUI_AddItemScreenPB extends JFrame implements ActionListener
 		AddItemScreen_PB.add(ItemDateLabel_AIPB, GBConstraints_AIPB);
 		
 		//Layout Component (1,2) Design and Implementation:
-		TargetItemDate = SessionGUI_Global.getSessionDate().getTime();
+		TargetItemDate = new Date();
 		TargetItemDateLabel_AIPB = new JLabel(TargetItemDate.toString());
 		GBConstraints_AIPB.fill = GridBagConstraints.HORIZONTAL;
 		GBConstraints_AIPB.gridheight = 1;

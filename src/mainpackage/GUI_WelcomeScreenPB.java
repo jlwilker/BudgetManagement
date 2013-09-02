@@ -1,16 +1,19 @@
 package mainpackage;
 
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
+import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class GUI_WelcomeScreenPB extends JFrame implements ActionListener 
 {
@@ -21,6 +24,7 @@ public class GUI_WelcomeScreenPB extends JFrame implements ActionListener
 	 * This class needs to "return" an account name, need a string and a getter function
 	 */
 	private static GUI_PersonalBudget SessionGUI_Global;
+	private static PersonalBudgetGUI GUI = new PersonalBudgetGUI();
 	private static GUI_AccountDisplayScreenPB AccountDisplay = new GUI_AccountDisplayScreenPB();
 	
 	private String TargetAccountName;
@@ -81,20 +85,6 @@ public class GUI_WelcomeScreenPB extends JFrame implements ActionListener
 		/*
 		 * Initialize and Add Frame Components to Layout:
 		 */
-		
-		//Layout Component (0,0) Design and Initialization:
-		SessionDate_WSPB = new JLabel("Will be date");
-		// DateFormat.getInstance().format(targetItem.getDate())
-		GBConstraints_WSPB.fill = GridBagConstraints.HORIZONTAL;
-		GBConstraints_WSPB.gridheight = 1;
-		GBConstraints_WSPB.gridwidth = 1;
-		GBConstraints_WSPB.gridx = 0;
-		GBConstraints_WSPB.gridy = 0;
-		GBConstraints_WSPB.ipady = 10;
-		GBConstraints_WSPB.anchor = GridBagConstraints.LINE_START;
-		
-		//Add (0,0) Component to Layout
-		WelcomeScreen_PB.add(SessionDate_WSPB, GBConstraints_WSPB);
 		
 		//Layout Component (0,1) Design and Initialization:
 		Instruction_WSPB = new JLabel("Please select account:");
@@ -175,7 +165,28 @@ public class GUI_WelcomeScreenPB extends JFrame implements ActionListener
 		
 		if (e.getSource() == CancelButton_WSPB)
 		{
-			WelcomeScreen_PB.dispose(); //"are you sure?" message?
+			PersonalBudgetGUI gui = new PersonalBudgetGUI();
+			AccountItem item = new AccountItem("name", 0.00, new Date(),
+					"category", 0);
+			
+			JPanel addPanel = gui.AccountItemAddPanel();
+			JPanel initAddPanel = gui.AccountItemAddPanel(item);
+			JPanel displayPanel = gui.AccountItemDisplayPanel(item);
+			//PersonalBudgetGUI.AccountAddPanel innerObject = gui.new AccountAddPanel();
+			
+			JFrame frame = new JFrame("Account Information");
+			//Size
+			frame.setSize(600,650);
+			//Actions on Close
+			frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+			//Layout Options
+			frame.setLayout(new FlowLayout());
+			
+			frame.add(addPanel); //"are you sure?" message?
+			frame.add(initAddPanel);
+			frame.add(displayPanel);
+			
+			frame.setVisible(true);
 		}
 		
 	}
