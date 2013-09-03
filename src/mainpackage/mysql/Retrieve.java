@@ -85,7 +85,7 @@ public class Retrieve
 		{
 			connection = DriverManager.getConnection(url, user, passwd);
 			pStatement = connection.prepareStatement("SELECT date, ActivityName, Amount, " +
-					"ActivityDate FROM calendar_table, Activities WHERE " +
+					"ActivityDate, Frequency, TypeInt FROM calendar_table, Activities WHERE " +
 					"calendar_table.day=Activities.ActivityDate AND calendar_table.date " +
 					"BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 2 WEEK);");
 			resultSet = pStatement.executeQuery();
@@ -94,8 +94,11 @@ public class Retrieve
 			
 			while(resultSet.next())
 			{
-				item = new RecurringItem(resultSet.getString(2), Double.parseDouble(resultSet.getString(3)), 
-						(Date)df.parse(resultSet.getString(1)), "Bill", 0);
+				item = new RecurringItem(resultSet.getString(2), 
+						Double.parseDouble(resultSet.getString(3)), 
+						Integer.parseInt(resultSet.getString(1)), 
+						Integer.parseInt(resultSet.getString(4)), 
+						Integer.parseInt(resultSet.getString(5)));
 				
 				resultSetRA.add(item);	
 			}
@@ -106,10 +109,6 @@ public class Retrieve
 			logger.log(Level.SEVERE, sqlEx.getMessage(), sqlEx);
 		}
 		catch (NumberFormatException e) 
-		{
-			e.printStackTrace();
-		} 
-		catch (ParseException e) 
 		{
 			e.printStackTrace();
 		}
