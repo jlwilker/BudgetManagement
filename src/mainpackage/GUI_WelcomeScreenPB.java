@@ -6,14 +6,19 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import mainpackage.mysql.RecurringItem;
 
 public class GUI_WelcomeScreenPB extends JFrame implements ActionListener 
 {
@@ -159,7 +164,8 @@ public class GUI_WelcomeScreenPB extends JFrame implements ActionListener
 		if (e.getSource() == OKButton_WSPB)
 		{
 			TargetAccountName = AccountSelectionComboBox_WSPB.getSelectedItem().toString();
-			AccountDisplay.CreateAndShowWindow(SessionGUI_Global, this); //this might not be the way to call next window
+			AccountDisplay.CreateAndShowWindow(SessionGUI_Global, this); 
+			//this might not be the way to call next window
 			WelcomeScreen_PB.dispose(); 
 		}
 		
@@ -168,10 +174,17 @@ public class GUI_WelcomeScreenPB extends JFrame implements ActionListener
 			PersonalBudgetGUI gui = new PersonalBudgetGUI();
 			AccountItem item = new AccountItem("name", 0.00, new Date(),
 					"category", 0);
+			RecurringItem recItem = new RecurringItem("name", 0.00, 0,
+					0, 1);
 			
 			JPanel addPanel = gui.AccountItemAddPanel();
 			JPanel initAddPanel = gui.AccountItemAddPanel(item);
 			JPanel displayPanel = gui.AccountItemDisplayPanel(item);
+			JPanel confirmationPanel = gui.ConfirmationPanel();
+			JPanel horiPanel = gui.HorizontalItemDisplayPanel(item);
+			JPanel recPanel = gui.RecurringItemAddPanel();
+			JPanel rec2Panel = gui.RecurringItemAddPanel(recItem);
+			JPanel recDisplay = gui.RecurringItemDisplayPanel(recItem);
 			//PersonalBudgetGUI.AccountAddPanel innerObject = gui.new AccountAddPanel();
 			
 			JFrame frame = new JFrame("Account Information");
@@ -182,14 +195,11 @@ public class GUI_WelcomeScreenPB extends JFrame implements ActionListener
 			//Layout Options
 			frame.setLayout(new FlowLayout());
 			
-			frame.add(addPanel); //"are you sure?" message?
-			frame.add(initAddPanel);
-			frame.add(displayPanel);
+			frame.add(recPanel); //"are you sure?" message?
+			frame.add(rec2Panel);
+			frame.add(recDisplay);
 			
 			frame.setVisible(true);
 		}
-		
-	}
-	
-	
+	}	
 }

@@ -1,6 +1,6 @@
 package mainpackage.mysql;
 
-public class RecurringAccountItem 
+public class RecurringItem 
 {
 	private String name;
 	private double amount;
@@ -15,7 +15,7 @@ public class RecurringAccountItem
 	 * @param frequency
 	 * @param type
 	 */
-	public RecurringAccountItem(String name, double amount, Integer dueDate,
+	public RecurringItem(String name, double amount, Integer dueDate,
 			Integer frequency, Integer type) 
 	{
 		super();
