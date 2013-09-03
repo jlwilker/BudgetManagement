@@ -26,10 +26,10 @@ public class Retrieve
 	/**
 	 * @param args
 	 */
-	private static List<AccountItem> resultSetRA = new ArrayList<AccountItem>();
-	private AccountItem item;
+	private static List<RecurringItem> resultSetRA = new ArrayList<RecurringItem>();
+	private RecurringItem item;
 	
-	public List<AccountItem> getResultSetRA()
+	public List<RecurringItem> getResultSetRA()
 	{
 		return this.resultSetRA;
 	}
@@ -94,7 +94,7 @@ public class Retrieve
 			
 			while(resultSet.next())
 			{
-				item = new AccountItem(resultSet.getString(2), Double.parseDouble(resultSet.getString(3)), 
+				item = new RecurringItem(resultSet.getString(2), Double.parseDouble(resultSet.getString(3)), 
 						(Date)df.parse(resultSet.getString(1)), "Bill", 0);
 				
 				resultSetRA.add(item);	
