@@ -15,7 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import mainpackage.mysql.Retrieve;
+//import mainpackage.mysql.Retrieve;
 import mainpackage.xml.XMLWriter;
 
 public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener 
@@ -79,7 +79,7 @@ public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener
 	/*
 	 * MySQL Retrieve Commands
 	 */
-	Retrieve retrieve = new Retrieve();
+	//Retrieve retrieve = new Retrieve();
 	
 	/*
 	 * GridBag Components (GridBagLayout, GridBagConstraints):
@@ -87,6 +87,7 @@ public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener
 	private GridBagLayout GBLayout_ADPB = new GridBagLayout();
 	private GridBagConstraints GBConstraints_ADPB = new GridBagConstraints();
 	
+	//Get rid of below function b/c replaced w/horizontal display?
 	public JPanel CreateAccountItemPanel(AccountItem targetItem)
 	{
 		AIDisplayPanel_PB = new JPanel(new GridLayout(2, 2, 1, 2));
@@ -140,6 +141,8 @@ public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener
 		/*
 		 * Initialize and Add Components to Layout:
 		 */
+		//Use variable so that when adding/subtracting, don't have to constantly update
+		int gridValueY = 0; 
 		
 		//Layout Component (0,0) Design and Implementation:
 		AccountNameLabel_ADPB = new JLabel("Account Name: ");
@@ -147,7 +150,7 @@ public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener
 		GBConstraints_ADPB.gridheight = 1;
 		GBConstraints_ADPB.gridwidth = 1;
 		GBConstraints_ADPB.gridx = 0;
-		GBConstraints_ADPB.gridy = 0;
+		GBConstraints_ADPB.gridy = gridValueY;
 		
 		//Add Component (0,0) to Layout
 		AccountDisplayScreen_PB.add(AccountNameLabel_ADPB, GBConstraints_ADPB);
@@ -158,7 +161,7 @@ public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener
 		GBConstraints_ADPB.gridheight = 1;
 		GBConstraints_ADPB.gridwidth = 1;
 		GBConstraints_ADPB.gridx = 1;
-		GBConstraints_ADPB.gridy = 0;
+		GBConstraints_ADPB.gridy = gridValueY;
 		
 		//Add Component (1,0) to Layout
 		AccountDisplayScreen_PB.add(TargetAccountNameLabel_ADPB, GBConstraints_ADPB);
@@ -169,7 +172,7 @@ public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener
 		GBConstraints_ADPB.gridheight = 1;
 		GBConstraints_ADPB.gridwidth = 1;
 		GBConstraints_ADPB.gridx = 0;
-		GBConstraints_ADPB.gridy = 2;
+		GBConstraints_ADPB.gridy = ++gridValueY;
 		
 		//Add Component (0,2) to Layout
 		AccountDisplayScreen_PB.add(AccountTotalLabel_ADPB, GBConstraints_ADPB);
@@ -182,7 +185,7 @@ public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener
 		GBConstraints_ADPB.gridheight = 1;
 		GBConstraints_ADPB.gridwidth = 1;
 		GBConstraints_ADPB.gridx = 1;
-		GBConstraints_ADPB.gridy = 2;
+		GBConstraints_ADPB.gridy = gridValueY;
 		
 		//Add Component (1,2) to Layout
 		AccountDisplayScreen_PB.add(TargetAccountTotalLabel_ADPB, GBConstraints_ADPB);
@@ -193,7 +196,7 @@ public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener
 		GBConstraints_ADPB.gridheight = 1;
 		GBConstraints_ADPB.gridwidth = 2;
 		GBConstraints_ADPB.gridx = 0;
-		GBConstraints_ADPB.gridy = 3;
+		GBConstraints_ADPB.gridy = ++gridValueY;
 		
 		//Add Component (0,3) to Layout
 		AccountDisplayScreen_PB.add(AccountNameLabel_ADPB, GBConstraints_ADPB);
@@ -204,7 +207,7 @@ public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener
 		GBConstraints_ADPB.gridheight = 1;
 		GBConstraints_ADPB.gridwidth = 1;
 		GBConstraints_ADPB.gridx = 0;
-		GBConstraints_ADPB.gridy = 4;
+		GBConstraints_ADPB.gridy = ++gridValueY;
 		
 		//Add Component (0,4) to Layout
 		AccountDisplayScreen_PB.add(AccountNameLabel_ADPB, GBConstraints_ADPB);
@@ -212,12 +215,10 @@ public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener
 		/*
 		 * This populates the resultSetRA with appropriate values
 		 */
-		retrieve.upcomingActivityRetrieveMySQL();
-		
-		int gridValueY;
+		//retrieve.upcomingActivityRetrieveMySQL(); //uncomment once mysql is back
 		
 		//this is going to need to be updated for Accounts that have large numbers of items
-		//probably going to need to be outside function, because will need passed in boundary
+		/*//probably going to need to be outside function, because will need passed in boundary
 		for(gridValueY=5; gridValueY < retrieve.getResultSetRA().size()+5; gridValueY++) 
 		{	
 			UpcomingActivityPanel_ADPB = CreateAccountItemPanel
@@ -233,7 +234,7 @@ public class GUI_AccountDisplayScreenPB extends JFrame implements ActionListener
 			
 			//Add Component (0,i) to Layout
 			AccountDisplayScreen_PB.add(UpcomingActivityPanel_ADPB, GBConstraints_ADPB);
-		}
+		}*/
 		
 		//Layout Component (0,5) Design and Implementation:
 		AccountNameLabel_ADPB = new JLabel("----------------------------------------");

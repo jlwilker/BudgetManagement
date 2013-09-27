@@ -42,9 +42,10 @@ public class XMLReader
 		this.accountList = new ArrayList<Account>();
 
 		// populate files[] with all .xml files in current directory
-		this.files = this.curDir.listFiles(new FilenameFilter() {
-			public boolean accept(File dir, String name) {
-				// TODO Auto-generated method stub
+		this.files = this.curDir.listFiles(new FilenameFilter() 
+		{
+			public boolean accept(File dir, String name) 
+			{
 				return name.endsWith(".xml");
 			}
 		});

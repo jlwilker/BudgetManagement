@@ -12,7 +12,8 @@ import javax.swing.JPanel;
 
 import mainpackage.xml.XMLReader;
 
-public class GUI_PersonalBudget {
+public class GUI_PersonalBudget 
+{
 	private static GUI_WelcomeScreenPB WelcomeScreen;
 	private static GUI_AccountDisplayScreenPB AccountDisplay;
 	private static Calendar sessionDate;
@@ -49,6 +50,15 @@ public class GUI_PersonalBudget {
 		
 		// get arraylist of accounts here
 		ArrayList<Account> accountsToAdd = readAccounts.getAccountList();
+		
+		/*
+		 * DELETE WHEN HAVE ACTUAL XML FILE. CHRIST.
+		 */
+		Account myAccount = new Account("Jess Checking", 2.02);
+		AvailableAccounts.add(myAccount);
+		/*
+		 * DELETE WHEN HAVE ACTUAL XML FILE. CHRIST.
+		 */
 
 		// add them to AvailableAccounts
 		AvailableAccounts.addAll(accountsToAdd);
