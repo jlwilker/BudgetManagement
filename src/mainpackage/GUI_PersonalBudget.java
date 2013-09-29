@@ -18,7 +18,7 @@ public class GUI_PersonalBudget
 	private static GUI_AccountDisplayScreenPB AccountDisplay;
 	private static Calendar sessionDate;
 	
-	private static ArrayList<Account> AvailableAccounts = new ArrayList<Account>();
+	protected static ArrayList<Account> AvailableAccounts = new ArrayList<Account>();
 	
 	public ArrayList<Account> getAvailableAccounts()
 	{

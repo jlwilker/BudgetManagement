@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+import mainpackage.GUI_PersonalBudget;
+
 /** main class **/
 public class Driver 
 {
