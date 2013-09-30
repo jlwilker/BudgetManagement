@@ -10,10 +10,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import packageGUI.WelcomeScreen;
 import mainpackage.xml.XMLReader;
 
 public class GUI_PersonalBudget 
 {
+	//DELETE LATER MAYBE
+	private static WelcomeScreen theOtherWelcomeScreen;
+	protected static PersonalBudgetGUI GUI_Functions = new PersonalBudgetGUI();
+	
 	private static GUI_WelcomeScreenPB WelcomeScreen;
 	private static GUI_AccountDisplayScreenPB AccountDisplay;
 	private static Calendar sessionDate;
@@ -64,9 +69,9 @@ public class GUI_PersonalBudget
 		AvailableAccounts.addAll(accountsToAdd);
 		
 		//*
-		WelcomeScreen = new GUI_WelcomeScreenPB();
+		/*WelcomeScreen = new GUI_WelcomeScreenPB();
 		
-		WelcomeScreen.CreateAndShowWindow(this); 
+		WelcomeScreen.CreateAndShowWindow(this); */
 	}
 
 }

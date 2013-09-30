@@ -18,6 +18,9 @@ import mainpackage.PersonalBudgetGUI;
 
 public class WelcomeScreen extends GUI_PersonalBudget implements ActionListener
 {
+	//AccountAddScreen?
+	protected static AccountAddScreen addScreen = new AccountAddScreen();
+	
 	//1) Create JFrame to create window
 	JFrame welcomeFrame = new JFrame("Personal Budget Management");
 	
@@ -85,20 +88,31 @@ public class WelcomeScreen extends GUI_PersonalBudget implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent ae) 
 	{
+		/*
+		 * OPTION 1: User would like to add new account
+		 */
 		if(ae.getSource() == newAccountButton)
 		{
 			System.out.println("New Stuff!");
+			
+			addScreen.CreateAndShowWindow();
 		}
-		
+		/*
+		 * OPTION 2: User already has a stored account
+		 */
 		if(ae.getSource() == OKButton)
 		{
 			System.out.println("OK!");
 		}
 		
+		/*
+		 * OPTION 3: User would like to close program
+		 * 
+		 * !!!Need to add "are you sure?" message!!!
+		 */
 		if(ae.getSource() == CancelButton)
 		{
-			System.out.println("Canceled!");
+			welcomeFrame.dispose();
 		}
 	}
-	
 }

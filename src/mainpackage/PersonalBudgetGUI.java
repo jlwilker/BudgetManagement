@@ -4,6 +4,8 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,6 +26,99 @@ import mainpackage.mysql.RecurringItem;
 
 public class PersonalBudgetGUI extends JFrame
 {
+	public JPanel AccountAddPanel()
+	{
+		//JPanel and List to contain JComponents w/i Panel
+	    JPanel AccountAddPanel;
+	    
+	    //JLabels to be included in Panel
+	    JLabel AA_NameLabel;
+	    JLabel AA_AmountLabel;
+	    
+	    //JTextFields to be included in Panel
+	    JTextField AA_NameTextField;
+	    JTextField AA_AmountTextField;
+	    
+	    //Instantiate Panel, ArrayList
+	    AccountAddPanel = new JPanel(new GridLayout(3, 2, 1, 0));
+	    
+	    //Instantiate JComponents
+	    AA_NameLabel = new JLabel("Account Name: ");
+	    AA_NameTextField = new JTextField();
+	    AA_AmountLabel = new JLabel("Initial Amount: ");
+	    AA_AmountTextField = new JTextField();
+	    
+	    //Add JComponents to Panel
+	    AccountAddPanel.add(AA_NameLabel);
+	    AccountAddPanel.add(AA_NameTextField);
+	    AccountAddPanel.add(AA_AmountLabel);
+	    AccountAddPanel.add(AA_AmountTextField);
+	    
+	    return AccountAddPanel;
+	}
+	
+	public JPanel AccountAddPanel(Account target)
+	{
+		//JPanel and List to contain JComponents w/i Panel
+	    JPanel AccountAddPanel;
+	    
+	    //JLabels to be included in Panel
+	    JLabel AA_NameLabel;
+	    JLabel AA_AmountLabel;
+	    
+	    //JTextFields to be included in Panel
+	    JTextField AA_NameTextField;
+	    JTextField AA_AmountTextField;
+	    
+	    //Instantiate Panel, ArrayList
+	    AccountAddPanel = new JPanel(new GridLayout(3, 2, 1, 0));
+	    
+	    //Instantiate JComponents
+	    AA_NameLabel = new JLabel("Account Name: ");
+	    AA_NameTextField = new JTextField(target.getAccountName());
+	    AA_AmountLabel = new JLabel("Initial Amount: ");
+	    AA_AmountTextField = new JTextField(Double.toString(target.getAccountTotal()));
+	    
+	    //Add JComponents to Panel
+	    AccountAddPanel.add(AA_NameLabel);
+	    AccountAddPanel.add(AA_NameTextField);
+	    AccountAddPanel.add(AA_AmountLabel);
+	    AccountAddPanel.add(AA_AmountTextField);
+	    
+	    return AccountAddPanel;
+	}
+	
+	public JPanel AccountDisplayPanel(Account target)
+	{
+		//JPanel and List to contain JComponents w/i Panel
+	    JPanel AccountDisplayPanel;
+	    
+	    //JLabels to be included in Panel
+	    JLabel AD_NameLabel;
+	    JLabel AD_AmountLabel;
+	    
+	    //JTextFields to be included in Panel
+	    JLabel AD_RtdNameLabel;
+	    JLabel AD_RtdAmountLabel;
+	    
+	    //Instantiate Panel, ArrayList
+	    AccountDisplayPanel = new JPanel(new GridLayout(3, 2, 1, 0));
+	    
+	    //Instantiate JComponents
+	    AD_NameLabel = new JLabel("Account Name: ");
+	    AD_RtdNameLabel = new JLabel(target.getAccountName());
+	    AD_AmountLabel = new JLabel("Initial Amount: ");
+	    AD_RtdAmountLabel = new JLabel(Double.toString(target.getAccountTotal()));
+	    
+	    //Add JComponents to Panel
+	    AccountDisplayPanel.add(AD_NameLabel);
+	    AccountDisplayPanel.add(AD_RtdNameLabel);
+	    AccountDisplayPanel.add(AD_AmountLabel);
+	    AccountDisplayPanel.add(AD_RtdAmountLabel);
+	    
+	    return AccountDisplayPanel;
+	}
+	
 	public JPanel AccountItemAddPanel()
 	{
 	    //JPanel and List to contain JComponents w/i Panel
@@ -629,5 +724,7 @@ public class PersonalBudgetGUI extends JFrame
 
 	    return RecurringDisplayPanel;
 	}
+
+	
 }
 
